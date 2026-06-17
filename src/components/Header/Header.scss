@@ -1,0 +1,28 @@
+@use 'sass:color';
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+$header-height: 64px;
+
+.header-page-space {
+  height: calc($header-height + 5px);
+}
+
+.header {
+  padding: 0.5rem;
+  background-color: $body-bg-dark;
+  position: fixed;
+  top: 0;
+  box-sizing: border-box;
+  width: 100vw;
+
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  height: $header-height;
+  filter: none;
+
+  .logo {
+    height: $header-height;
+    padding: 4px;
+  }
+}
