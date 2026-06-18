@@ -1,5 +1,4 @@
-@use 'sass:color';
-@import "../../../node_modules/bootstrap/scss/bootstrap";
+@use "../../app/globals" as *;
 
 $header-height: 64px;
 

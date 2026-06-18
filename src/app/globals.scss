@@ -1,7 +1,7 @@
-@import "../../node_modules/bootstrap/scss/bootstrap";
 $enable-dark-mode: true;
-$body-bg: $body-bg-dark;
 $primary: #fba119;
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 html {
   height: 100%;
@@ -51,8 +51,8 @@ main {
   width: 100%;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 2rem 1rem;
+  justify-content: center;
+  padding: 5rem 1rem 2rem 1rem;
 }
 
 .page {

@@ -32,7 +32,7 @@ export default function RootLayout({
         <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
         <body>
         <Header/>
-        <main>{children}</main>
+        <main className="main">{children}</main>
         <Footer/>
         </body>
         </html>

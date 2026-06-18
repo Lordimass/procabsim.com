@@ -1,7 +1,7 @@
 @use "../../app/globals" as *;
 
 .footer {
-  background-color: $body-bg;
+  background-color: $body-bg-dark;
   padding: 10px;
   display: flex;
   flex-direction: column;
