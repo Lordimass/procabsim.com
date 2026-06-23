@@ -35,8 +35,6 @@ export default function Footer() {
         <span>Company No. XXXXXXXX</span>
         <span className="policy-separator" aria-hidden="true">/</span>
         <span>Registered in England & Wales [[ADDRESS HERE]]</span>
-        <span className="policy-separator" aria-hidden="true">/</span>
-        <span>Contact: daisy@procabsim.com</span>
       </p>
     </div>
   );

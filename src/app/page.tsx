@@ -14,7 +14,7 @@ export default function Home() {
                 priority
             />
         </div>
-        <div id={styles.intro}>
+        <div id={styles.intro} className={"main-page-content"}>
             <h1>Our Vision</h1>
             <p>
                 To create a place where people who may never get the chance – can experience what it’s like to drive a
