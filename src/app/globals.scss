@@ -39,7 +39,7 @@ body {
   margin: 0;
 }
 
-p, a, h1, h2, h3, h4, h5, h6, li {
+p, a, h1, h2, h3, h4, h5, h6, li, label, span {
   color: $gray-100
 }
 
@@ -81,7 +81,7 @@ main {
   background-color: var(--background);
 }
 
-/* Breadcrumbs */
+/**************** Breadcrumbs ****************/
 nav[aria-label="breadcrumb"] {
   align-self: flex-start;
 }
@@ -96,4 +96,10 @@ nav[aria-label="breadcrumb"] {
 
 .breadcrumb-item[aria-current="page"] {
   color: white;
+}
+
+/**************** Forms ****************/
+.form-label {
+  font-weight: bold;
+  margin-bottom: 0.2rem;
 }

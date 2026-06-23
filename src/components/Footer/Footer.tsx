@@ -25,16 +25,8 @@ export default function Footer() {
         <br />
       </p>
       <br />
-      <p>
-        Website made by <a href="https://lordimass.net">Sam Knight</a> <br />
-      </p>
-      <br />
       <p className="footer-company-information">
         <Copyright />
-        <span className="policy-separator" aria-hidden="true">/</span>
-        <span>Company No. XXXXXXXX</span>
-        <span className="policy-separator" aria-hidden="true">/</span>
-        <span>Registered in England & Wales [[ADDRESS HERE]]</span>
       </p>
     </div>
   );

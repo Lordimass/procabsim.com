@@ -1,0 +1,12 @@
+@use "../../app/globals" as *;
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  background-color: $body-bg-dark;
+
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
