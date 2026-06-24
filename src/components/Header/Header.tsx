@@ -14,6 +14,7 @@ export default function Header() {
                         width={50}
                         height={50}
                         alt="A minimalist stylised train wheel with orange spokes"
+                        loading="eager"
                     />
                 </a>
                 <Dropdown>

@@ -1,0 +1,17 @@
+@use "../../app/globals" as *;
+
+.policy-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  background-color: $body-bg-dark;
+
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+
+  @media screen and (max-width: 500px) {
+    margin-left: -1rem;
+    width: 100vw;
+  }
+}
