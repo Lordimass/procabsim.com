@@ -21,9 +21,9 @@ export default function Page() {
             Watch a short video of the simplified cab setup here
         </Button>
         <div className={"simulator-showcase-images"}>
-            <Image src="/class700/2.webp" width={300} height={400} alt="Class 700 image" />
-            <Image src="/class700/1.webp" width={300} height={400} alt="Class 700 image" />
-            <Image src="/class700/3.webp" width={300} height={400} alt="Class 700 image" />
+            <Image src="/simulators/class700/2.webp" width={300} height={400} alt="Class 700 image" />
+            <Image src="/simulators/class700/1.webp" width={300} height={400} alt="Class 700 image" />
+            <Image src="/simulators/class700/3.webp" width={300} height={400} alt="Class 700 image" />
         </div>
     </div>);
 }

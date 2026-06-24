@@ -1,0 +1,51 @@
+@use "../../app/globals" as *;
+
+.simulator-book {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 100%;
+  overflow: hidden;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  padding: 0.5rem;
+
+  background-color: $body-bg-dark;
+  border-bottom: 2px solid $primary;
+
+  @media screen and (orientation: portrait) {
+    flex-direction: column;
+  }
+
+  img {
+    aspect-ratio: 1 / 1;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 0.2rem;
+  }
+
+  .simulator-book-content {
+    display: flex;
+    max-width: 80%;
+    flex-direction: column;
+    color: $text-color;
+
+    @media screen and (orientation: portrait) {
+      max-width: 100%;
+    }
+
+    p {
+      display: block;
+      word-wrap: break-word;
+      overflow: hidden;
+      max-height: 2.8em;
+      line-height: 1.4em;
+      margin-bottom: 0;
+    }
+
+    .price {
+      font-size: 1.2rem;
+    }
+  }
+}

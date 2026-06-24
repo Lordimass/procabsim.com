@@ -17,13 +17,14 @@ export default function Header() {
                         loading="eager"
                     />
                 </a>
+                <Button href="/book">Book Your Slot</Button>
                 <Dropdown>
-                    <DropdownToggle id="dropdown-basic" >Our Simulators</DropdownToggle>
+                    <DropdownToggle id="dropdown-basic" variant="outline-primary">Our Simulators</DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem href="/simulators/class700">Class 700</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
-                <Button variant={"outline-primary"} href={"/contact-us"}>Contact Us</Button>
+                <Button variant="outline-primary" href="/contact-us">Contact Us</Button>
             </div>
         </>
     );

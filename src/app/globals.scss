@@ -1,5 +1,6 @@
 $enable-dark-mode: true;
 $primary: #fba119;
+$text-color: #F8F9FA;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
@@ -40,7 +41,11 @@ body {
 }
 
 p, a, h1, h2, h3, h4, h5, h6, li, label, span {
-  color: $gray-100
+  color: $text-color
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-align: left;
 }
 
 a {
