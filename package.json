@@ -10,6 +10,8 @@
     "lint:fix": "eslint --fix"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.0",
+    "@supabase/supabase-js": "^2.108.2",
     "bootstrap": "^5.3.8",
     "lordis-react-components": "^1.8.0",
     "next": "16.2.9",

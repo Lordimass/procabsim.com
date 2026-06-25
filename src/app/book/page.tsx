@@ -1,16 +1,20 @@
-import {Breadcrumb, BreadcrumbItem} from "react-bootstrap";
-import * as fs from "node:fs";
-import SimulatorBook from "@/components/SimulatorBook/SimulatorBook";
+"use client"
 
-export default async function Page() {
-    const files = await new Promise((resolve, reject) => {
-        fs.readdir(process.cwd() + "/public/simulators", undefined,
-            (err, files) => {
-                if (err) reject(err);
-                else resolve(files);
-            });
-    })
-    console.log(files);
+import {Breadcrumb, BreadcrumbItem} from "react-bootstrap";
+import SimulatorBook from "@/components/SimulatorBook/SimulatorBook";
+import {createClient} from "@/lib/supabase/client"
+import {useEffect, useState} from "react";
+
+export default function Page() {
+    const supabase = createClient();
+    const [simulators, setSimulators] = useState<any[]>([]);
+    useEffect(() => {
+        async function fetch() {
+            const resp = await supabase.rpc("get_simulators_with_images")
+            setSimulators(resp.data)
+        }
+        fetch().then()
+    }, [])
 
     return <div className="main-page-content">
         <Breadcrumb>
