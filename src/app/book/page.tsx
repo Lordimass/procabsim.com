@@ -1,5 +1,4 @@
 import {Breadcrumb, BreadcrumbItem} from "react-bootstrap";
-import path from "node:path";
 import * as fs from "node:fs";
 import SimulatorBook from "@/components/SimulatorBook/SimulatorBook";
 

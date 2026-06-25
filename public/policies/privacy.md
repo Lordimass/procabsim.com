@@ -1,5 +1,5 @@
 # Privacy Policy
-_Last update 24th June 2026_  
+_Last update 25th June 2026_  
 This Privacy Notice for PROCAB SIMULATORS ('we', 'us', or 'our'), describes how and why we might access, collect, store, use, and/or share ('process') your personal information when you use our services, including when you:
 
 *   Visit our website at [https://procabsim.com](https://procabsim.com), or any website of ours that links to this Privacy Notice
@@ -17,7 +17,7 @@ When you visit, use, or navigate our services, we may process personal informati
 
 ### Do we process any sensitive personal information?
 
-Some of the information may be considered 'special' or 'sensitive' in certain jurisdictions, for example your racial or ethnic origins, sexual orientation, and religious beliefs. We do not process sensitive personal information.
+Some of the information may be considered 'special' or 'sensitive' in certain jurisdictions, for example your racial or ethnic origins, sexual orientation, and religious beliefs. In limited circumstances we may process sensitive personal information when necessary to provide accessible services or reasonable accommodations. Other than this, we do not process sensitive information.
 
 ### Do we collect any information from third parties?
 
@@ -75,7 +75,7 @@ We collect personal information that you voluntarily provide to us when you expr
 *   email addresses
 *   mailing addresses
 
-**Sensitive Information.** We do not process sensitive information.
+**Sensitive Information.** In limited circumstances we may process sensitive personal information when necessary to provide accessible services or reasonable accommodations. Other than this, we do not process sensitive information.
 
 **Payment Data.** We may process data necessary to process your payment if you choose to make purchases, such as your payment instrument number, and the security code associated with your payment instrument. All payment data is handled and stored by SumUp. You may find their privacy notice link(s) here: https://www.sumup.com/en-us/privacy/. We do not store this data.
 
@@ -129,6 +129,8 @@ The General Data Protection Regulation (GDPR) and UK GDPR require us to explain 
 
 *   **Vital Interests.** We may process your information where we believe it is necessary to protect your vital interests or the vital interests of a third party, such as situations involving potential threats to the safety of any person.
 
+*   **To provide accessible services and reasonable accommodations.** In limited circumstances we may process sensitive personal information when necessary to provide accessible services or reasonable accommodations. 
+
 
 ## 4\. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?
 
@@ -159,6 +161,8 @@ _**In Short:** We keep your information for as long as necessary to fulfil the p
 We will only keep your personal information for as long as it is necessary for the purposes set out in this Privacy Notice, unless a longer retention period is required or permitted by law (such as tax, accounting, or other legal requirements).
 
 When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymise such information, or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible.
+
+Accessibility/disability related sensitive information is retained until the end of the booked session, unless otherwise required by applicable law.
 
 ## 7\. HOW DO WE KEEP YOUR INFORMATION SAFE?
 
