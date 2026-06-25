@@ -1,5 +1,9 @@
 @use "../../app/globals" as *;
 
+.main-page-content:has(.policy-wrapper) {
+  max-width: 1000px;
+}
+
 .policy-wrapper {
   display: flex;
   flex-direction: column;
