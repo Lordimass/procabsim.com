@@ -1,5 +1,6 @@
 $enable-dark-mode: true;
 $primary: #fba119;
+$btn-active-bg-tint-amount: 50;
 $text-color: #F8F9FA;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
@@ -40,12 +41,17 @@ body {
   margin: 0;
 }
 
-p, a, h1, h2, h3, h4, h5, h6, li, label, span {
+p, a, h1, h2, h3, h4, h5, h6, li, label, span, hr {
   color: $text-color
 }
 
 h1, h2, h3, h4, h5, h6 {
   text-align: left;
+
+  + hr {margin-top: 0;}
+}
+hr:has(+ h1, + h2, + h3, + h4, + h5, + h6) {
+  margin-bottom: 8px;
 }
 
 a {

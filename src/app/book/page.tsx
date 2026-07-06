@@ -1,20 +1,21 @@
 "use client"
 
 import {Breadcrumb, BreadcrumbItem} from "react-bootstrap";
-import SimulatorBook from "@/components/SimulatorBook/SimulatorBook";
-import {createClient} from "@/lib/supabase/client"
 import {useEffect, useState} from "react";
+import {Simulator} from "@/lib/types/types";
+import "@daypicker/react/style.css"
+import Section1 from "@/components/Booking/FormSections/Section1";
+import Section2 from "@/components/Booking/FormSections/Section2";
+import Section3 from "@/components/Booking/FormSections/Section3";
 
 export default function Page() {
-    const supabase = createClient();
-    const [simulators, setSimulators] = useState<any[]>([]);
+    const [selectedSimulator, selectSimulator] = useState<Simulator>();
+    const [accessibilityRead, setAccessibilityRead] = useState(false);
+    const [date, setDate] = useState<Date>();
+
     useEffect(() => {
-        async function fetch() {
-            const resp = await supabase.rpc("get_simulators_with_images")
-            setSimulators(resp.data)
-        }
-        fetch().then()
-    }, [])
+        setAccessibilityRead(false);
+    }, [selectedSimulator]);
 
     return <div className="main-page-content">
         <Breadcrumb>
@@ -22,7 +23,22 @@ export default function Page() {
             <BreadcrumbItem active>Book</BreadcrumbItem>
         </Breadcrumb>
         <h1>Book Your Train Simulator Experience</h1>
-        <p>We currently have 1 simulator available to book.</p>
-        <SimulatorBook/>
+        <p>The following form will take you through the steps of booking your simulator experience. It's important read
+            each part carefully to ensure we can give you the best service possible.</p>
+
+        <Section1 selectedSimulator={selectedSimulator} selectSimulator={selectSimulator}/>
+
+        {selectedSimulator
+            ? <Section2
+                selectedSimulator={selectedSimulator}
+                accessibilityRead={accessibilityRead}
+                setAccessibilityRead={setAccessibilityRead}
+            /> : null}
+
+        {accessibilityRead
+            ? <Section3
+                date={date}
+                setDate={setDate}
+            />: null}
     </div>
 }

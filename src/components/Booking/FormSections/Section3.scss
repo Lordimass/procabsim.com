@@ -1,0 +1,71 @@
+@use "../../../app/globals" as *;
+
+#formSection3 > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  justify-content: center;
+
+  #day-picker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #go-to-today {
+    margin-bottom: 0.5rem;
+  }
+
+  .btn-group-custom {
+    display: none;
+    gap: 0.25rem;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    flex-wrap: wrap;
+
+    .btn {
+      flex-grow: 0;
+      //border-radius: 6px;
+    }
+  }
+
+  @media screen and (orientation: portrait) {
+    .btn-group-custom {
+      display: flex;
+    }
+
+    .btn-group-vertical {
+      display: none;
+    }
+  }
+}
+
+
+/**************** DayPicker ****************/
+.rdp-root {
+  --rdp-accent-color: var(--bs-primary);
+  --rdp-selected-border: 2px solid var(--bs-primary);
+
+  color: $text-color;
+  background-color: $body-bg-dark;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: max-content;
+
+  .rdp-selected button {
+    border-radius: 0;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+  }
+
+  .rdp-disabled {
+    // Draw an SVG top left to bottom right
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 10 10'> <path d='M0 0 L0 0 L10 10' stroke='red' /></svg>");
+    background-repeat:no-repeat;
+    background-position:center center;
+    //scale it
+    background-size: 100% 100%, auto;
+  }
+}

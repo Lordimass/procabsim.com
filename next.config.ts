@@ -22,6 +22,9 @@ const nextConfig: NextConfig = {
                 permanent: true,
             }
         ]
+    },
+    images: {
+        remotePatterns: [new URL("https://bvxxbkafrjoboauypopg.supabase.co/**")]
     }
 };
 
