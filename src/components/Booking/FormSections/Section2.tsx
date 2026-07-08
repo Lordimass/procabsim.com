@@ -19,7 +19,7 @@ export default function Section2({selectedSimulator, accessibilityRead, setAcces
         <FormLabel>
             If you have specific accessibility needs you would like us to know about please enter them below.
         </FormLabel>
-        <FormControl as="textarea" name="message"/>
+        <FormControl as="textarea" name="message"/> {/* TODO: Save this */}
         <p>
             Information entered here may be read or shared internally in order to do our best to help you. We
             will never share your information externally. Please see our <a href="/privacy">Privacy Policy</a>{" "}

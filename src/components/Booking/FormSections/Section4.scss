@@ -1,0 +1,17 @@
+@use "../../../app/globals" as *;
+
+.optional-extras {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.optional-extra {
+  background-color: $body-bg-dark;
+  padding: 1rem;
+  border-radius: 0.2rem;
+}
+
+.optional-extra-btn {
+  width: 100%;
+}

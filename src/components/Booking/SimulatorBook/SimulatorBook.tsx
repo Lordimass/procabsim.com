@@ -26,7 +26,7 @@ export default function SimulatorBook({simulator, selected, selectSimulator}: Si
             <a href={`/simulators/${simulator.sim.id}`}>Read More</a>
             <hr/>
             <Button variant="outline-primary" onClick={() => selectSimulator(simulator)} disabled={selected}>
-                {selected ? <>Booked for {priceElement}</> : <>Book a slot on this simulator for {priceElement}</>}
+                {selected ? <>Selected for {priceElement}</> : <>Book a slot on this simulator for {priceElement}</>}
             </Button>
         </div>
     </div>

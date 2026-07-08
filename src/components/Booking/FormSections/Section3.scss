@@ -1,5 +1,12 @@
 @use "../../../app/globals" as *;
 
+#formSection3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
 #formSection3 > div {
   display: flex;
   align-items: flex-start;
@@ -41,6 +48,11 @@
   }
 }
 
+#formSection3 > p {
+  background-color: darken($primary, 20);
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
 
 /**************** DayPicker ****************/
 .rdp-root {

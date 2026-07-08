@@ -18,18 +18,19 @@ interface EventSlot {
     end_time: Date
 }
 
-// Works under the assumption that all bookings will be in the UK (where the timezone changes, but universally)
+// Times are in GMT+0
 const DAY_START = new Date(2026, 1, 1,
-    9, 0, 0, 0
+    8, 0, 0, 0
 )
-
 const DAY_END = new Date(2026, 1, 1,
-    17, 0, 0, 0
+    16, 0, 0, 0
 )
 
 const SLOT_MINUTES_LENGTH = 60;
 
-export default function Section3({date, setDate}: Section3Props) {
+const noAvailableTimes = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+
+export default function Section3({date: selectedTime, setDate: setSelectedTime}: Section3Props) {
     const today = new Date();
     const lowerBound = new Date();
     const upperBound = new Date();
@@ -37,13 +38,17 @@ export default function Section3({date, setDate}: Section3Props) {
     upperBound.setMonth(lowerBound.getMonth() + 6);
     const [month, _setMonth] = useState<Date>(today);
 
-    const [availableTimes, setAvailableTimes] = useState<EventSlot[][]>([[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]);
+    const [availableTimes, setAvailableTimes] = useState<EventSlot[][]>(noAvailableTimes);
     const [datesWithNoSlots, setDatesWithNoSlots] = useState<Date[]>([])
-    const [selectedTime, setSelectedTime] = useState<string | null>(null);
+    const [date, setDate] = useState<Date | undefined>(undefined);
+    const endTime = new Date(selectedTime ?? 0)
+    endTime.setMinutes(endTime.getMinutes() + SLOT_MINUTES_LENGTH)
 
+    useEffect(() => {setMonth(month).then()}, []);
     async function setMonth(newMonth: Date) {
-        console.log(newMonth, newMonth.toISOString())
         _setMonth(newMonth);
+        setAvailableTimes(noAvailableTimes)
+        setDate(undefined)
         await getAvailableTimes(newMonth, setAvailableTimes)
     }
 
@@ -51,7 +56,7 @@ export default function Section3({date, setDate}: Section3Props) {
         getDatesWithNoSlots(availableTimes, month, setDatesWithNoSlots);
     }, [availableTimes]);
     useEffect(() => {
-        setSelectedTime(null)
+        setSelectedTime(undefined)
     }, [date]);
 
     const [vertical, setVertical] = useState<boolean>(false);
@@ -79,7 +84,6 @@ export default function Section3({date, setDate}: Section3Props) {
                     mode="single"
                     selected={date} onSelect={setDate}
                     month={month} onMonthChange={setMonth}
-                    footer={date ? `Selected: ${date.toLocaleDateString()}` : "Pick a day"}
                     weekStartsOn={1}
                     startMonth={today}
                     disabled={[
@@ -102,30 +106,34 @@ export default function Section3({date, setDate}: Section3Props) {
                     buildTimeButtons(availableTimes[date.getDate()-1], selectedTime, setSelectedTime)
                 }</ButtonGroup> : null}
         </div>
+        {selectedTime
+            ? <p>
+                You have selected {selectedTime.toLocaleDateString()}.
+                Your slot will run from {getTimeString(selectedTime)} to {getTimeString(endTime)}
+            </p> : null}
     </div>
 }
 
 function buildTimeButtons(
     availableTimes: { name: string, value: string }[],
-    selectedTime: string | null,
-    setSelectedTime: (date: string) => void
+    selectedTime: Date | undefined,
+    setSelectedTime: (date: Date) => void
 ) {
+    console.log(availableTimes);
     return availableTimes.map((item, i) => <ToggleButton
         key={i}
         id={`radio-${i}`}
         name="radio" type="radio"
         value={item.value}
-        checked={selectedTime === item.value}
-        onChange={(e) => setSelectedTime(e.currentTarget.value)}
+        checked={selectedTime?.toISOString() === item.value}
+        onChange={(e) => setSelectedTime(new Date(e.currentTarget.value))}
     >{item.name}</ToggleButton>)
 }
 
 async function getAvailableTimes(month: Date, setAvailableTimes: (times: EventSlot[][]) => void) {
     const supabase = createClient();
-    DAY_START.setMinutes(DAY_START.getMinutes() + DAY_START.getTimezoneOffset())
-    DAY_END.setMinutes(DAY_END.getMinutes() + DAY_END.getTimezoneOffset())
     month.setMinutes(month.getMinutes() - month.getTimezoneOffset())
-    console.log(month.toISOString())
+    console.log(DAY_START, DAY_END)
     const resp = await supabase.functions.invoke("get-free-timeslots", {
         body: {
             month: month.toISOString(),
@@ -154,7 +162,7 @@ async function getAvailableTimes(month: Date, setAvailableTimes: (times: EventSl
 }
 
 function getTimeString(date: Date) {
-    const timeString = date.toTimeString()
+    const timeString = date.toTimeString();
     const segments = timeString.split(":")
     return `${segments[0]}:${segments[1]}`;
 }

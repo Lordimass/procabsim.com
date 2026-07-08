@@ -1,0 +1,12 @@
+#formSection5 {
+  display: flex;
+  flex-direction: column;
+
+  .form-check {
+    margin-left: 2em;
+  }
+
+  button {
+    width: 100%;
+  }
+}
