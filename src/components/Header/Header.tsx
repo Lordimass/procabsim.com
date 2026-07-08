@@ -1,31 +1,34 @@
 import "./Header.scss";
 import Image from "next/image";
-import Dropdown from "react-bootstrap/Dropdown";
-import {Button, DropdownItem, DropdownMenu, DropdownToggle} from "react-bootstrap";
+import {
+    DropdownItem, Nav, Navbar, NavbarBrand, NavbarCollapse, NavbarToggle, NavDropdown, NavLink
+} from "react-bootstrap";
 
 export default function Header() {
     return (
         <>
-            <div className="header">
-                <a href={"/"} aria-label='Return to "ProCab Simulators" Home Page'>
+            <Navbar className="header" expand="lg">
+                <NavbarBrand href="/" aria-label="Return to ProCab Simulators Home Page">
                     <Image
                         className="logo"
-                        src={"/favicon.svg"}
+                        src="/favicon.svg"
                         width={50}
                         height={50}
                         alt="A minimalist stylised train wheel with orange spokes"
                         loading="eager"
                     />
-                </a>
-                <Button href="/book">Book Your Slot</Button>
-                <Dropdown>
-                    <DropdownToggle id="dropdown-basic" variant="outline-primary">Our Simulators</DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem href="/simulators/class700">Class 700</DropdownItem>
-                    </DropdownMenu>
-                </Dropdown>
-                <Button variant="outline-primary" href="/contact-us">Contact Us</Button>
-            </div>
+                </NavbarBrand>
+                <NavbarToggle aria-controls="basic-navbar-nav" />
+                <NavbarCollapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <NavLink className="btn btn-primary" href="/book">Book Your Slot</NavLink>
+                        <NavDropdown className="btn btn-outline-primary" title="Our Simulators" id="basic-nav-dropdown">
+                            <DropdownItem href="/simulators/class700">Class 700</DropdownItem>
+                        </NavDropdown>
+                        <NavLink className="btn btn-outline-primary" href="/contact-us">Contact Us</NavLink>
+                    </Nav>
+                </NavbarCollapse>
+            </Navbar>
         </>
     );
 }

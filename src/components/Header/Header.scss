@@ -1,28 +1,56 @@
 @use "../../app/globals" as *;
 
-$header-height: 64px;
+$header-height: 56px;
 
 .header-page-space {
   height: calc($header-height + 5px);
 }
 
 .header {
-  display: flex;
-  align-items: center;
   gap: 1rem;
-  padding: 0.5rem;
   background-color: $body-bg-dark;
+  padding: 0 !important;
   position: fixed;
   top: 0;
   box-sizing: border-box;
   width: 100vw;
 
   z-index: 100;
-  height: $header-height;
   filter: none;
 
-  .logo {
-    height: $header-height;
-    padding: 4px;
+  .navbar-brand {
+    padding: 0 !important;
+    margin-right: 8px !important;
+
+    .logo {
+      height: $header-height;
+      padding: 4px;
+    }
+  }
+
+  .navbar-nav {
+    gap: 0.5rem;
+  }
+
+  .nav-link:not(.dropdown-toggle) {
+    border: $primary solid 1px;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-color;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .btn-primary {
+    background-color: $primary;
+  }
+
+  .navbar-toggler-icon {
+    color: $text-color;
+    background-image: url("/hamburger.svg")
   }
 }
