@@ -1,0 +1,9 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/variables-dark";
+
+#loginForm {
+  background-color: $body-bg-dark;
+  padding: 1rem;
+  border-radius: 0.3rem;
+}

@@ -1,0 +1,11 @@
+table td {
+  text-align: center;
+  align-items: center;
+}
+
+table .save-and-reset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1ch;
+}

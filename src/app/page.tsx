@@ -36,23 +36,27 @@ export default function Home() {
         <div id={styles.supportersBox}>
             <p id={styles.supportersText}><b>Our amazing supporters:</b></p>
             <ImageMarquee images={[
+                "/supporters/dovetail.png",
+                "/supporters/train-sim-world.png",
                 "/supporters/alstom.png",
-                "/supporters/armstrong-powerhouse.jpeg",
                 "/supporters/corys.png",
                 "/supporters/craig&derricott.png",
-                "/supporters/deuta-werke.png",
-                "/supporters/dovetail.png",
-                "/supporters/gessmann.png",
-                "/supporters/grt.png",
                 "/supporters/hitachi.png",
-                "/supporters/lnwr-wmr.png",
-                "/supporters/reality-modelling.jpg",
-                "/supporters/retro-logo.png",
+                "/supporters/rivet.webp",
                 "/supporters/spii.svg",
+                "/supporters/unipart-rail.png",
                 "/supporters/train-sim-tech.png",
-                "/supporters/train-sim-world.png",
+                "/supporters/gessmann.png",
                 "/supporters/trent-instruments.png",
-                "/supporters/unipart-rail.png"
+                "/supporters/alstom.png",
+                "/supporters/lnwr-wmr.png",
+                "/supporters/retro-logo.png",
+                "/supporters/armstrong-powerhouse.jpeg",
+                "/supporters/deuta-werke.png",
+                "/supporters/grt.png",
+                "/supporters/Romic.png",
+                "/supporters/reality-modelling.jpg",
+
             ]}/>
         </div>
 
