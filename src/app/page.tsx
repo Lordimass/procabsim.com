@@ -56,7 +56,8 @@ export default function Home() {
                 "/supporters/grt.png",
                 "/supporters/Romic.png",
                 "/supporters/reality-modelling.jpg",
-
+                "/supporters/grammer.png",
+                "/supporters/kraus&naimer.png"
             ]}/>
         </div>
 

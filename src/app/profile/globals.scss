@@ -9,3 +9,27 @@ table .save-and-reset-buttons {
   justify-content: center;
   gap: 1ch;
 }
+
+.adminPanel {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.panelLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  >img, >h3 {
+    transition: filter 0.15s;
+  }
+}
+
+.panelLink:hover {
+  h3 {
+    filter: invert(1);
+  }
+  > img {
+    filter: invert(0);
+  }
+}
+

@@ -91,6 +91,10 @@ main {
   background-color: var(--background);
 }
 
+.invert {
+  filter: invert(1);
+}
+
 /**************** Breadcrumbs ****************/
 nav[aria-label="breadcrumb"] {
   align-self: flex-start;
