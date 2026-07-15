@@ -1,0 +1,13 @@
+#booking-settings-form {
+  .col {
+    display: flex;
+    align-items: center;
+  }
+}
+
+#email-settings-form {
+  textarea {
+    font-family: monospace;
+    height: max-content;
+  }
+}

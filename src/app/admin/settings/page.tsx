@@ -2,9 +2,11 @@
 
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import {useContext} from "react";
-import {SiteSettingsContext} from "@/lib/siteSettings/siteSettings";
+import {SiteSettingsContext} from "@/lib/siteSettings";
 import styles from "./page.module.scss"
-import Supporters from "@/app/admin/settings/SupportersSettings";
+import SupportersSettings from "@/app/admin/settings/SupportersSettings";
+import BookingSettings from "@/app/admin/settings/BookingSettings";
+import EmailSettings from "@/app/admin/settings/EmailSettings";
 
 export default function Page() {
     const siteSettings = useContext(SiteSettingsContext);
@@ -19,6 +21,8 @@ export default function Page() {
         <h1>Admin Settings</h1>
         <p>Here, you can modify key information for the website's operation and appearance.</p>
 
-        <Supporters/>
+        <BookingSettings/>
+        <SupportersSettings/>
+        <EmailSettings/>
     </div>
 }

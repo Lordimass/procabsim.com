@@ -1,8 +1,10 @@
 import styles from "@/app/book/page.module.scss";
 import SimulatorBook from "@/components/Booking/SimulatorBook/SimulatorBook";
 import {Simulator} from "@/lib/types/types";
-import {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
+import {Dispatch, SetStateAction, useContext, useEffect, useRef, useState} from "react";
 import {createClient} from "@/lib/supabase/client";
+import {getSimulators} from "@/lib/cache";
+import {SiteSettingsContext} from "@/lib/siteSettings";
 
 interface Section1Props {
     selectedSimulator: Simulator | undefined;
@@ -30,12 +32,11 @@ export default function Section1({selectedSimulator, selectSimulator}: Section1P
 }
 
 function useGetSimulators() {
-    const supabase = createClient();
     const [simulators, setSimulators] = useState<(Simulator | null)[]>([null]);
     useEffect(() => {
         async function fetch() {
-            const resp = await supabase.rpc("get_simulators_with_images")
-            setSimulators(resp.data[0])
+            const resp = await getSimulators()
+            setSimulators(resp)
         }
         fetch().then()
     }, [])

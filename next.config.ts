@@ -4,7 +4,14 @@ const nextConfig: NextConfig = {
     /* config options here */
     reactCompiler: true,
     sassOptions: {
-        silenceDeprecations: ["import", "legacy-js-api", "color-functions", "if-function", "global-builtin"],
+        silenceDeprecations: [
+            "import",
+            "legacy-js-api",
+            "color-functions",
+            "if-function",
+            "global-builtin",
+            "function-units"
+        ],
     },
     turbopack: {
         rules: {

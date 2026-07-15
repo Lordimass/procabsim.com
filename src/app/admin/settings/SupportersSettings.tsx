@@ -1,9 +1,11 @@
 import InputGroup from "react-bootstrap/InputGroup";
 import {useContext, useState} from "react";
-import {SiteSettingsContext} from "@/lib/siteSettings/siteSettings";
+import {SiteSettingsContext} from "@/lib/siteSettings";
 import {Button, FormControl} from "react-bootstrap";
 import styles from "./page.module.scss"
 import {createClient} from "@/lib/supabase/client";
+import invalidateCache from "@/lib/cacheClient";
+import {getSiteSettingsCacheTag} from "@/lib/cache";
 
 export default function SupportersSettings() {
     const siteSettings = useContext(SiteSettingsContext);
@@ -26,6 +28,7 @@ export default function SupportersSettings() {
         } else {
             setFeedback("Saved successfully.");
             setOriginalSupporters(newSupporters)
+            await invalidateCache(supabase, [await getSiteSettingsCacheTag()])
         }
     }
 
@@ -33,7 +36,7 @@ export default function SupportersSettings() {
         setNewSupporters(originalSupporters);
     }
 
-    return <><h2>Supporters</h2>
+    return <><hr/><h2>Supporters</h2><hr/>
         <p>
             References to images which should be displayed as a "supporter" on the home page. These may be relative
             paths to images stored in the '/public/' directory on the server, e.g. '/supporters/hitachi.png', or they

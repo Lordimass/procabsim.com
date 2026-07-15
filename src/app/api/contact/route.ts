@@ -1,23 +1,29 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import {getSiteSettings} from "@/lib/cache";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
     try {
+        const {email_template_contact_form, email_template_contact_form_confirmation} = await getSiteSettings()
         const body = await request.json();
-
         const { name, email, message } = body;
+        let email_contact_form = email_template_contact_form;
+        email_contact_form = email_contact_form.replace(`$\{name\}`, name);
+        email_contact_form = email_contact_form.replace(`$\{email\}`, email);
+        email_contact_form = email_contact_form.replace(`$\{message\}`, message);
+        let email_contact_form_confirmation = email_template_contact_form_confirmation;
+        email_contact_form_confirmation = email_contact_form_confirmation.replace(`$\{name\}`, name);
+        email_contact_form_confirmation = email_contact_form_confirmation.replace(`$\{email\}`, email);
+        email_contact_form_confirmation = email_contact_form_confirmation.replace(`$\{message\}`, message);
 
         await resend.emails.send({
             from: `${name} <onboarding@resend.dev>`, // TODO: Replace with custom domain
             to: "lordimass@lordimass.net", // TODO: Replace with correct endpoint email
             subject: `ProCabSim Contact Form - ${name}`,
             replyTo: email,
-            html: `
-<p>${message}</p>
-<hr/>
-<p><b>The above user filled in the "Contact us" entry form on the procabsim.com website.</b></p>`
+            html: email_contact_form,
         });
 
         await resend.emails.send({
@@ -25,20 +31,7 @@ export async function POST(request: Request) {
             to: `${email}`,
             subject: `ProCabSim Message Received - ${name}`,
             replyTo: "noreply@procabsim.com",
-            html: `
-<p>
-    Hello!<br/>
-    Thank you for contacting us, we will get in touch as soon as we can. The following message was received:
-</p>
-<p><i>"${message}"</i></p>
-<p>
-    Kind regards,<br/>
-    ProCab Simulators
-</p>
-<hr/>
-<p><b>
-    This email is a receipt for your contact form submission on our website <a href="https://procabsim.com">procabsim.com</a> in which your email address was used. If that was not you, please ignore this message.
-</b></p>`
+            html: email_contact_form_confirmation
         });
 
         return NextResponse.json({ success: true });

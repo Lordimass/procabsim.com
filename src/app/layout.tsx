@@ -3,8 +3,8 @@ import "./globals.scss";
 import React from "react";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import SiteSettingsProvider from "@/lib/siteSettings/siteSettings";
-import {getSiteSettings} from "@/lib/siteSettings/siteSettingsServer";
+import SiteSettingsProvider from "@/lib/siteSettings";
+import {getSiteSettings} from "@/lib/cache";
 
 export const metadata: Metadata = {
     title: "ProCab Simulators",

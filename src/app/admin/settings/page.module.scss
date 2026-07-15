@@ -1,3 +1,17 @@
+// =============== BOOKINGS ===============
+.settingsForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// =============== SUPPORTERS ===============
 .supporters {
   display: flex;
   flex-direction: column;

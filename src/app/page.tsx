@@ -6,7 +6,7 @@ import styles from "./page.module.scss";
 import {Button} from "react-bootstrap";
 import SupporterImages from "@/components/SupporterImages/SupporterImages";
 import {useContext} from "react";
-import {SiteSettingsContext} from "@/lib/siteSettings/siteSettings";
+import {SiteSettingsContext} from "@/lib/siteSettings";
 
 export default function Home() {
     const siteSettings = useContext(SiteSettingsContext)

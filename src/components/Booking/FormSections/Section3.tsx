@@ -1,10 +1,11 @@
 import styles from "@/app/book/page.module.scss";
 import {DayPicker} from "@daypicker/react";
-import {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
+import {Dispatch, SetStateAction, useContext, useEffect, useRef, useState} from "react";
 import "./Section3.scss"
 import {Button, ButtonGroup, ToggleButton} from "react-bootstrap";
 import {createClient} from "@/lib/supabase/client";
 import {MonthsEventSlots} from "../../../../public/types/calendar";
+import {SiteSettings, SiteSettingsContext} from "@/lib/siteSettings";
 
 interface Section3Props {
     date: Date | undefined;
@@ -18,19 +19,12 @@ interface EventSlot {
     end_time: Date
 }
 
-// Times are in GMT+0
-const DAY_START = new Date(2026, 1, 1,
-    8, 0, 0, 0
-)
-const DAY_END = new Date(2026, 1, 1,
-    16, 0, 0, 0
-)
-
-const SLOT_MINUTES_LENGTH = 60;
-
 const noAvailableTimes = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
 
 export default function Section3({date: selectedTime, setDate: setSelectedTime}: Section3Props) {
+    const siteSettings = useContext(SiteSettingsContext);
+    if (!siteSettings) {return <p>Failed to load site settings</p>}
+
     const today = new Date();
     const lowerBound = new Date();
     const upperBound = new Date();
@@ -42,14 +36,14 @@ export default function Section3({date: selectedTime, setDate: setSelectedTime}:
     const [datesWithNoSlots, setDatesWithNoSlots] = useState<Date[]>([])
     const [date, setDate] = useState<Date | undefined>(undefined);
     const endTime = new Date(selectedTime ?? 0)
-    endTime.setMinutes(endTime.getMinutes() + SLOT_MINUTES_LENGTH)
+    endTime.setMinutes(endTime.getMinutes() + siteSettings.session_minutes)
 
     useEffect(() => {setMonth(month).then()}, []);
     async function setMonth(newMonth: Date) {
         _setMonth(newMonth);
         setAvailableTimes(noAvailableTimes)
         setDate(undefined)
-        await getAvailableTimes(newMonth, setAvailableTimes)
+        await getAvailableTimes(newMonth, setAvailableTimes, siteSettings!)
     }
 
     useEffect(() => {
@@ -130,16 +124,18 @@ function buildTimeButtons(
     >{item.name}</ToggleButton>)
 }
 
-async function getAvailableTimes(month: Date, setAvailableTimes: (times: EventSlot[][]) => void) {
+async function getAvailableTimes(month: Date, setAvailableTimes: (times: EventSlot[][]) => void, siteSettings: SiteSettings) {
     const supabase = createClient();
     month.setMinutes(month.getMinutes() - month.getTimezoneOffset())
-    console.log(DAY_START, DAY_END)
+    const dayStart = constructDateFromTime(siteSettings.day_start)
+    const dayEnd = constructDateFromTime(siteSettings.day_end)
+    console.log(dayStart, dayEnd)
     const resp = await supabase.functions.invoke("get-free-timeslots", {
         body: {
             month: month.toISOString(),
-            day_start: DAY_START.toISOString(),
-            day_end: DAY_END.toISOString(),
-            slot_minutes_length: SLOT_MINUTES_LENGTH
+            day_start: dayStart.toISOString(),
+            day_end: dayEnd.toISOString(),
+            slot_minutes_length: siteSettings.session_minutes
         }
     })
     if (resp.error) console.error(resp.error);
@@ -159,6 +155,16 @@ async function getAvailableTimes(month: Date, setAvailableTimes: (times: EventSl
         eventSlots.push(dayEvents)
     }
     setAvailableTimes(eventSlots)
+}
+
+// TODO: Time currently taken in users local timezone, should instead be GMT+0 always, or the timezone of the server. (UK Time)
+function constructDateFromTime(time: string) {
+    const date = new Date();
+    const timeSegs = time.split(":")
+    if (timeSegs.length > 1) {
+        date.setHours(Number(timeSegs[0]), Number(timeSegs[1]), 0, 0)
+    }
+    return date
 }
 
 function getTimeString(date: Date) {
