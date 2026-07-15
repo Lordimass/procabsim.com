@@ -1,0 +1,14 @@
+.supporters {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .supporter {
+    display: flex;
+  }
+
+  #supportersAddButton {
+    margin-top: 0.25rem;
+
+  }
+}

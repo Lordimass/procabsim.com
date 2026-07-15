@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
                 source: "/refunds",
                 destination: "/cancellations",
                 permanent: true,
+            },
+            {
+                source: "/admin",
+                destination: "/profile",
+                permanent: true,
             }
         ]
     },

@@ -1,10 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import "./globals.scss"
 import styles from "./page.module.scss";
 import {Button} from "react-bootstrap";
-import ImageMarquee from "@/components/ImageMarquee/ImageMarquee";
+import SupporterImages from "@/components/SupporterImages/SupporterImages";
+import {useContext} from "react";
+import {SiteSettingsContext} from "@/lib/siteSettings/siteSettings";
 
 export default function Home() {
+    const siteSettings = useContext(SiteSettingsContext)
+
     return (<>
         <div id={styles.logo}>
             <Image
@@ -35,30 +41,7 @@ export default function Home() {
         </div>
         <div id={styles.supportersBox}>
             <p id={styles.supportersText}><b>Our amazing supporters:</b></p>
-            <ImageMarquee images={[
-                "/supporters/dovetail.png",
-                "/supporters/train-sim-world.png",
-                "/supporters/alstom.png",
-                "/supporters/corys.png",
-                "/supporters/craig&derricott.png",
-                "/supporters/hitachi.png",
-                "/supporters/rivet.webp",
-                "/supporters/spii.svg",
-                "/supporters/unipart-rail.png",
-                "/supporters/train-sim-tech.png",
-                "/supporters/gessmann.png",
-                "/supporters/trent-instruments.png",
-                "/supporters/alstom.png",
-                "/supporters/lnwr-wmr.png",
-                "/supporters/retro-logo.png",
-                "/supporters/armstrong-powerhouse.jpeg",
-                "/supporters/deuta-werke.png",
-                "/supporters/grt.png",
-                "/supporters/Romic.png",
-                "/supporters/reality-modelling.jpg",
-                "/supporters/grammer.png",
-                "/supporters/kraus&naimer.png"
-            ]}/>
+            <SupporterImages images={siteSettings?.supporters ?? []}/>
         </div>
 
     </>);
