@@ -2,6 +2,7 @@ $enable-dark-mode: true;
 $primary: #fba119;
 $btn-active-bg-tint-amount: 50;
 $text-color: #F8F9FA;
+$main-page-max-width: 800px;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
@@ -31,7 +32,7 @@ body {
   flex-direction: column;
   padding: 2rem 0 2rem 0;
   width: 100%;
-  max-width: 800px;
+  max-width: $main-page-max-width;
   text-align: justify;
 }
 

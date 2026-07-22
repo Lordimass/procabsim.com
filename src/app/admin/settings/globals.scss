@@ -11,3 +11,14 @@
     height: max-content;
   }
 }
+
+.simulator-settings .simulator-settings-optexts {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+#deleteButtonColumn {
+  display: flex;
+  flex-direction: column;
+}

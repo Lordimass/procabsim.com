@@ -2,7 +2,7 @@ import {createClient, getUser, getUserProfile, Profile} from "@/lib/supabase/ser
 import {redirect} from "next/navigation";
 import {Breadcrumb, BreadcrumbItem, Button, Table} from "react-bootstrap";
 import "./globals.scss"
-import { NameRow } from "@/app/profile/NameRow";
+import {NameRow} from "@/app/profile/NameRow";
 import {EmailRow} from "@/app/profile/EmailRow";
 import {PasswordRow} from "@/app/profile/PasswordRow";
 import {User} from "@supabase/supabase-js";
@@ -11,9 +11,13 @@ import Image from "next/image";
 export default async function Page() {
     const supabase = await createClient()
     const user = await getUser(supabase);
-    if (!user) {redirect("/login")}
+    if (!user) {
+        redirect("/login")
+    }
     const profile = await getUserProfile(supabase)
-    if (!profile) {redirect("/login")}
+    if (!profile) {
+        redirect("/login")
+    }
 
     return <div className="main-page-content" data-bs-theme="dark">
         <Breadcrumb>
@@ -25,27 +29,35 @@ export default async function Page() {
             Welcome to your profile page. Here you can see important details about your account, and manage upcoming
             bookings.
         </p>
-        <Table striped bordered hover><tbody>
+        <Table striped bordered hover>
+            <tbody>
             <NameRow profile={profile}/>
             <EmailRow user={user}/>
             <PasswordRow user={user}/>
-            { profile.role !== "customer" ? // Don't show role to customers, it's not relevant.
+            {profile.role !== "customer" ? // Don't show role to customers, it's not relevant.
                 <tr>
                     <td>Role</td>
                     <td colSpan={2}>{profile.role}</td>
                 </tr> : null
             }
-        </tbody></Table>
+            </tbody>
+        </Table>
         {profile.role === "admin" ? <AdminPanel user={user} profile={profile}/> : null}
     </div>
 }
 
-function AdminPanel({user, profile}: {user: User, profile: Profile}) {
-    const panelLinks = [{
-        name: "Settings",
-        href: "/admin/settings",
-        icon: "/cog.svg"
-    }]
+function AdminPanel({user, profile}: { user: User, profile: Profile }) {
+    const panelLinks = [
+        {
+            name: "Settings",
+            href: "/admin/settings",
+            icon: "/cog.svg"
+        },
+        {
+            name: "Calendar",
+            href: "/admin/calendar",
+            icon: "/calendar.svg"
+        }]
     return <>
         <hr/>
         <h1>Admin Panel</h1>

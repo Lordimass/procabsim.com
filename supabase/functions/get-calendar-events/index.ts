@@ -9,15 +9,24 @@ import {CalEvent, RecurringCalEvent} from "../../../public/types/calendar.ts";
 
 interface Body {
   month: string;
+  endMonth?: string;
 }
 
 // This endpoint uses 'publishable' | 'secret' access, apiKey is required.
 // Use publishable for Client-facing, key-validated endpoints
 // Use secret for Server-to-server, internal calls
 export default {
-  fetch: withSupabase({ auth: ["publishable", "secret"] }, async (req, ctx) => {
-    // ctx.supabaseAdmin bypasses RLS — use for privileged operations
-    if (ctx.authMode !== "secret") return Response.json({msg: "Requires secret auth mode"}, {status: 401});
+  fetch: withSupabase({ auth: ["user", "secret"] }, async (req, ctx) => {
+    const userId = ctx.userClaims?.id
+    if (!userId) return Response.json({msg: "Failed to fetch user profile"}, {status: 500});
+    const {data, error} = await ctx.supabaseAdmin
+        .from("profiles")
+        .select("*")
+        .eq("id", userId);
+    if (error) return Response.json({msg: "Failed to fetch user profile.", error: error.toJSON()}, {status: 500});
+    if (data == null || data.length === 0) return Response.json({msg: "Account has no authorisation."}, {status: 401});
+    if ((data[0] as {role: string}).role !== "admin") return Response.json({msg: "Account has no authorisation."}, {status: 401});
+
     const bodyUnchecked = await req.json();
     if (!("month" in bodyUnchecked) ||
         !bodyUnchecked.month ||
@@ -38,9 +47,16 @@ function getStartAndEndDates(body: Body): Date[] {
   const startDate = new Date(body.month);
   startDate.setDate(1)
   startDate.setHours(0, 0, 0, 0)
-  const endDate = new Date(startDate);
-  endDate.setMonth(startDate.getMonth() + 1);
-  endDate.setTime(endDate.getTime()-1);
+  let endDate = new Date(startDate);
+  if (body.endMonth) {
+    endDate = new Date(body.endMonth);
+    endDate.setMonth(endDate.getMonth() + 1);
+    endDate.setHours(0, 0, 0, 0)
+    endDate.setTime(endDate.getTime() -1)
+  } else {
+    endDate.setMonth(startDate.getMonth() + 1);
+    endDate.setTime(endDate.getTime()-1);
+  }
   return [startDate, endDate];
 }
 

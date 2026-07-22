@@ -1,0 +1,24 @@
+@use "../../../app/globals" as *;
+
+#calendar-container {
+  --calendar-container-margin: 2rem;
+
+  position: relative;
+  left: calc(($main-page-max-width / 2) - 50vw);
+  padding: 0 var(--calendar-container-margin);
+  width: 100vw;
+
+  @media screen and (max-width: $main-page-max-width) {
+    --calendar-container-margin: 1rem;
+    left: -16px;
+  }
+
+  .event-tag-booking {
+    --sx-color-primary-container: #ae6f11;
+  }
+
+  .sx__event-modal {
+    padding: 1rem;
+    border-radius: 0.5rem
+  }
+}

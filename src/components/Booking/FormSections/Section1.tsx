@@ -1,10 +1,8 @@
 import styles from "@/app/book/page.module.scss";
 import SimulatorBook from "@/components/Booking/SimulatorBook/SimulatorBook";
 import {Simulator} from "@/lib/types/types";
-import {Dispatch, SetStateAction, useContext, useEffect, useRef, useState} from "react";
-import {createClient} from "@/lib/supabase/client";
+import {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
 import {getSimulators} from "@/lib/cache";
-import {SiteSettingsContext} from "@/lib/siteSettings";
 
 interface Section1Props {
     selectedSimulator: Simulator | undefined;
@@ -31,7 +29,7 @@ export default function Section1({selectedSimulator, selectSimulator}: Section1P
     </div>
 }
 
-function useGetSimulators() {
+export function useGetSimulators() {
     const [simulators, setSimulators] = useState<(Simulator | null)[]>([null]);
     useEffect(() => {
         async function fetch() {

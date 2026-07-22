@@ -6,6 +6,7 @@ import {Button, ButtonGroup, ToggleButton} from "react-bootstrap";
 import {createClient} from "@/lib/supabase/client";
 import {MonthsEventSlots} from "../../../../public/types/calendar";
 import {SiteSettings, SiteSettingsContext} from "@/lib/siteSettings";
+import {constructDateFromUTCTime, getTimeString} from "@/lib/lib";
 
 interface Section3Props {
     date: Date | undefined;
@@ -113,7 +114,6 @@ function buildTimeButtons(
     selectedTime: Date | undefined,
     setSelectedTime: (date: Date) => void
 ) {
-    console.log(availableTimes);
     return availableTimes.map((item, i) => <ToggleButton
         key={i}
         id={`radio-${i}`}
@@ -127,9 +127,8 @@ function buildTimeButtons(
 async function getAvailableTimes(month: Date, setAvailableTimes: (times: EventSlot[][]) => void, siteSettings: SiteSettings) {
     const supabase = createClient();
     month.setMinutes(month.getMinutes() - month.getTimezoneOffset())
-    const dayStart = constructDateFromTime(siteSettings.day_start)
-    const dayEnd = constructDateFromTime(siteSettings.day_end)
-    console.log(dayStart, dayEnd)
+    const dayStart = constructDateFromUTCTime(siteSettings.day_start)
+    const dayEnd = constructDateFromUTCTime(siteSettings.day_end)
     const resp = await supabase.functions.invoke("get-free-timeslots", {
         body: {
             month: month.toISOString(),
@@ -155,22 +154,6 @@ async function getAvailableTimes(month: Date, setAvailableTimes: (times: EventSl
         eventSlots.push(dayEvents)
     }
     setAvailableTimes(eventSlots)
-}
-
-// TODO: Time currently taken in users local timezone, should instead be GMT+0 always, or the timezone of the server. (UK Time)
-function constructDateFromTime(time: string) {
-    const date = new Date();
-    const timeSegs = time.split(":")
-    if (timeSegs.length > 1) {
-        date.setHours(Number(timeSegs[0]), Number(timeSegs[1]), 0, 0)
-    }
-    return date
-}
-
-function getTimeString(date: Date) {
-    const timeString = date.toTimeString();
-    const segments = timeString.split(":")
-    return `${segments[0]}:${segments[1]}`;
 }
 
 function getDatesWithNoSlots(availableTimes: EventSlot[][], month: Date, setDatesWithNoSlots: (dates: Date[]) => void) {

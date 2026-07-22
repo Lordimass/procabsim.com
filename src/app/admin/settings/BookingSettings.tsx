@@ -12,14 +12,18 @@ import {createClient} from "@/lib/supabase/client";
 import {getUser} from "@/lib/supabase/server";
 import {getSiteSettingsCacheTag} from "@/lib/cache";
 import invalidateCache from "@/lib/cacheClient";
+import {constructDateFromLocalTime, constructDateFromUTCTime, getTimeString} from "@/lib/lib";
 
-export default function BookingSettings() {
+export default function BookingSettings({showLinkToCalendar = true}: {showLinkToCalendar?: boolean}) {
     const siteSettings = useContext(SiteSettingsContext);
     if (!siteSettings) {return <p>Site settings could not be loaded</p>}
 
     const [originalSiteSettings, setOriginalSiteSettings] = useState(siteSettings);
     const [newSiteSettings, setNewSiteSettings] = useState(originalSiteSettings);
     const [feedback, setFeedback] = useState("");
+
+    const startTime = constructDateFromUTCTime(newSiteSettings.day_start)
+    const endTime = constructDateFromUTCTime(newSiteSettings.day_end)
 
     async function handleSave() {
         setFeedback("");
@@ -49,7 +53,8 @@ export default function BookingSettings() {
 
     return <><hr/><h2>Bookings</h2><hr/>
         <p>
-            Settings changed here will only apply to new bookings. Existing bookings will be unaffected.
+            Settings changed here will only apply to new bookings, whilst existing bookings will be unaffected. All
+            times are in your current local timezone.
         </p>
         <Form className={styles.settingsForm} id="booking-settings-form">
             {/* =============== BOOKINGS ENABLED ===============*/}
@@ -75,9 +80,11 @@ export default function BookingSettings() {
                 <Col><Form.Control
                     type="time"
                     aria-describedby="day-start-description"
-                    value={newSiteSettings.day_start}
+                    value={getTimeString(startTime)}
                     onChange={(e) => {
-                        setNewSiteSettings({...newSiteSettings, day_start: e.target.value})
+                        const date = constructDateFromLocalTime(e.target.value);
+                        date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+                        setNewSiteSettings({...newSiteSettings, day_start: getTimeString(date)})
                         if (feedback !== "") setFeedback("")
                     }}/></Col>
             </Row>
@@ -94,10 +101,11 @@ export default function BookingSettings() {
                 <Col><Form.Control
                     type="time"
                     aria-describedby="day-end-description"
-                    value={newSiteSettings.day_end}
+                    value={getTimeString(endTime)}
                     onChange={(e) => {
-                        setNewSiteSettings({...newSiteSettings, day_end: e.target.value})
-                        if (feedback !== "") setFeedback("")
+                        const date = constructDateFromLocalTime(e.target.value);
+                        date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+                        setNewSiteSettings({...newSiteSettings, day_end: getTimeString(date)})
                     }}/></Col>
             </Row>
                 <Form.Text id="day-end-description">
@@ -136,5 +144,11 @@ export default function BookingSettings() {
                 <p>{feedback}</p>
             </div>
         </Form>
+
+        {showLinkToCalendar ? <p>
+            If you want to block out specific or repeating times, or view your current bookings, go to{" "}
+            <a href={"/admin/calendar"}>the calendar</a>.
+        </p> : null}
+
     </>
 }

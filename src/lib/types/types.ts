@@ -1,5 +1,5 @@
 export interface Simulator {
-    images: SupabaseImage[],
+    images: SupabaseImage[] | null,
     extras: SimulatorOptionalExtra[]
     sim: {
         id: string,
@@ -15,6 +15,7 @@ export interface Simulator {
 export interface SupabaseImage {
     url: string;
     alt: string;
+    id: string;
 }
 
 export interface SimulatorOptionalExtra {

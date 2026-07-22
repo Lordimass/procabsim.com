@@ -11,6 +11,12 @@
   },
   "dependencies": {
     "@daypicker/react": "^10.0.1",
+    "@schedule-x/calendar": "^4.6.1",
+    "@schedule-x/current-time": "^4.6.1",
+    "@schedule-x/event-modal": "^4.6.1",
+    "@schedule-x/events-service": "^4.6.1",
+    "@schedule-x/react": "^4.1.0",
+    "@schedule-x/theme-default": "^4.6.1",
     "@sumup/sdk": "^0.1.6",
     "@supabase/server": "^1.2.0",
     "@supabase/ssr": "^0.12.0",
@@ -24,7 +30,8 @@
     "react-markdown": "^10.1.0",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",
-    "resend": "^6.14.0"
+    "resend": "^6.14.0",
+    "temporal-polyfill": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
